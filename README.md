@@ -2,6 +2,12 @@
 
 Google Cloud Tasks adapter for ActiveJobProcessor
 
+## Install
+
+```
+npm install @enviabybus/active-job-processor-cloud-tasks-adapter
+```
+
 ## How to use
 
 ```ts
