@@ -1,6 +1,6 @@
 {
   "name": "@enviabybus/active-job-processor-cloud-tasks-adapter",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Google Cloud Tasks adapter for ActiveJobProcessor",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

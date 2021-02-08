@@ -2,6 +2,8 @@ import { ActiveJob, ActiveJobProcessorAdapter } from '@enviabybus/active-job-pro
 import { CloudTasks, CloudTasksConfig, CloudTasksQueue, QueueOptions } from '@enviabybus/express-cloud-tasks';
 import { NextFunction, Request, Router } from 'express';
 
+const CLOUD_TASKS_QUEUE_NAME_MAX_LENGTH = 63;
+
 export class ActiveJobProcessorCloudTasksAdapter implements ActiveJobProcessorAdapter {
   cloudTasksConfig: CloudTasksConfig;
   queueNamePrefix: string;
@@ -68,7 +70,8 @@ export class ActiveJobProcessorCloudTasksAdapter implements ActiveJobProcessorAd
       queueOptions.retryConfig = { maxAttempts: 0 };
     }
 
-    const queue = this.cloudTasks.addQueue(`${this.queueNamePrefix}${job.name}`, queueOptions);
+    const queueName = `${this.queueNamePrefix}${job.name}`.substr(0, CLOUD_TASKS_QUEUE_NAME_MAX_LENGTH);
+    const queue = this.cloudTasks.addQueue(queueName, queueOptions);
     this.jobQueues[job.name] = queue;
 
     return queue;
