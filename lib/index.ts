@@ -11,7 +11,7 @@ export class ActiveJobProcessorCloudTasksAdapter implements ActiveJobProcessorAd
   private cloudTasks: {
     api: Router;
     addQueue(queueName: string, options?: QueueOptions | undefined): CloudTasksQueue;
-};
+  };
 
   constructor(cloudTasksConfig: CloudTasksConfig, queueNamePrefix: string = '') {
     this.cloudTasks = CloudTasks(cloudTasksConfig);;
@@ -67,7 +67,7 @@ export class ActiveJobProcessorCloudTasksAdapter implements ActiveJobProcessorAd
         if (backoff.maxDelay) { queueOptions.retryConfig.maxBackoff = backoff.maxDelay; }
       }
     } else {
-      queueOptions.retryConfig = { maxAttempts: 0 };
+      queueOptions.retryConfig = { maxAttempts: 1 };
     }
 
     const queueName = `${this.queueNamePrefix}${job.name}`.substr(0, CLOUD_TASKS_QUEUE_NAME_MAX_LENGTH);
